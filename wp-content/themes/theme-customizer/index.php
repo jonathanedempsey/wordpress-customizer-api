@@ -14,6 +14,12 @@
             <p class="site-title">
                 <a href="<?php bloginfo( 'url' ); ?>"><?php bloginfo( 'title' ); ?></a>
             </p>
+
+            <?php if( get_header_image() != "" ): ?>
+            <div id="banner">                
+                <img src="<?php header_image(); ?>" alt="Header graphic" />                
+            </div>
+            <?php endif ?>
            
         </div>
 
