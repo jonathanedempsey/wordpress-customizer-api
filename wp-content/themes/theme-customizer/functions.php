@@ -18,8 +18,21 @@ function wpt_register_theme_customizer( $wp_customize ) {
 	$wp_customize->get_control('page_on_front')->label = __('Select Homepage', 'wptthemecustomizer');  
 	$wp_customize->get_control('page_for_posts')->label = __('Select Blog Homepage', 'wptthemecustomizer');  
 
+	// Customize Background Settings
+	$wp_customize->get_section('background_image')->title = __('Background Styles', 'wptthemecustomizer');  
+	$wp_customize->get_control('background_color')->section = 'background_image'; 
+
 }
 add_action( 'customize_register', 'wpt_register_theme_customizer' );
+
+
+// Add theme support for Custom Backgrounds
+$defaults = array(
+  'default-color' => '#efefef',
+  'default-image' => get_template_directory_uri() . '/images/background.png',  
+);
+add_theme_support( 'custom-background', $defaults );
+
 
 // Custom js for theme customizer
 function wpt_customizer_js() {
