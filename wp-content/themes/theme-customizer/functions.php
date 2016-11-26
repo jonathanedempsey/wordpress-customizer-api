@@ -101,4 +101,16 @@ function wpt_theme_styles() {
 add_action( 'wp_enqueue_scripts', 'wpt_theme_styles' );
 
 
+// Add theme menus
+function wpt_theme_menus() {
+
+  register_nav_menus(
+    array(
+      'main-menu'   => __( 'Main Menu', 'wptthemecustomizer' ),
+    )
+  );
+
+}
+add_action( 'init', 'wpt_theme_menus' );
+
 ?>

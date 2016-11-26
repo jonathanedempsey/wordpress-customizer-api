@@ -20,6 +20,15 @@
                 <img src="<?php header_image(); ?>" alt="Header graphic" />                
             </div>
             <?php endif ?>
+
+            <?php 
+
+              $defaults = array(
+                'theme_location'  => 'main-menu',
+              );
+              wp_nav_menu( $defaults );
+
+            ?>               
            
         </div>
 
