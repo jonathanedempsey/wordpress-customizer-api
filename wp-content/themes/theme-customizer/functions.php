@@ -138,6 +138,30 @@ function wpt_register_theme_customizer( $wp_customize ) {
         )       
    );   
 
+  // Add Custom CSS Textfield
+  $wp_customize->add_section( 'custom_css_field' , array(
+    'title'      => __('Custom CSS','wptthemecustomizer'), 
+    'panel'      => 'design_settings',
+    'priority'   => 2000    
+  ) );  
+  $wp_customize->add_setting(
+      'wpt_custom_css',
+      array(          
+          'sanitize_callback' => 'sanitize_textarea'          
+      )
+  );
+  $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'custom_css',
+            array(
+                'label'          => __( 'Add custom CSS here', 'wptthemecustomizer' ),
+                'section'        => 'custom_css_field',
+                'settings'       => 'wpt_custom_css',
+                'type'           => 'textarea'
+            )
+        )
+   );
 
   // Create custom panels
   $wp_customize->add_panel( 'general_settings', array(
@@ -203,7 +227,10 @@ function wpt_style_header() {
     color: <?php echo get_theme_mod('wpt_h1_color'); ?>;
   }
 
-   
+  <?php if( get_theme_mod('wpt_custom_css') != '' ) {
+    echo get_theme_mod('wpt_custom_css');
+  } ?>
+
   </style>
   <?php 
 
@@ -222,6 +249,13 @@ add_theme_support( 'custom-background', $defaults );
 function sanitize_text( $text ) {
     
     return sanitize_text_field( $text );
+
+}
+
+// Sanitize textarea 
+function sanitize_textarea( $text ) {
+    
+    return esc_textarea( $text );
 
 }
 
