@@ -10,6 +10,10 @@
     <div class="container">
 
         <div id="header">
+
+            <?php if( get_theme_mod( 'wpt_logo') != "" ): ?>
+            <img id="logo" src="<?php echo get_theme_mod( 'wpt_logo' ); ?>">
+            <?php endif; ?>
            
             <p class="site-title">
                 <a href="<?php bloginfo( 'url' ); ?>"><?php bloginfo( 'title' ); ?></a>

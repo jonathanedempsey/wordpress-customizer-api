@@ -31,6 +31,55 @@ function wpt_register_theme_customizer( $wp_customize ) {
 	$wp_customize->get_control('header_textcolor')->section = 'header_text_styles'; 
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage'; 
 
+  // Add Custom Logo Settings
+  $wp_customize->add_section( 'custom_logo' , array(
+    'title'      => __('Change Your Logo','wptthemecustomizer'), 
+    'panel'      => 'design_settings',
+    'priority'   => 20    
+  ) );  
+  $wp_customize->add_setting(
+      'wpt_logo',
+      array(
+          'default'         => get_template_directory_uri() . '/images/logo.png',
+          //'transport'       => 'postMessage'
+      )
+  );
+  $wp_customize->add_control(
+       new WP_Customize_Image_Control(
+           $wp_customize,
+           'custom_logo',
+           array(
+               'label'      => __( 'Change Logo', 'wptthemecustomizer' ),
+               'section'    => 'custom_logo',
+               'settings'   => 'wpt_logo',
+               'context'    => 'wpt-custom-logo' 
+           )
+       )
+   ); 
+
+  // Create custom panels
+  $wp_customize->add_panel( 'general_settings', array(
+      'priority' => 10,
+      'theme_supports' => '',
+      'title' => __( 'General Settings', 'wptthemecustomizer' ),
+      'description' => __( 'Controls the basic settings for the theme.', 'wptthemecustomizer' ),
+  ) );
+  $wp_customize->add_panel( 'design_settings', array(
+      'priority' => 20,
+      'theme_supports' => '',
+      'title' => __( 'Design Settings', 'wptthemecustomizer' ),
+      'description' => __( 'Controls the basic design settings for the theme.', 'wptthemecustomizer' ),
+  ) ); 
+
+  // Assign sections to panels
+  $wp_customize->get_section('title_tagline')->panel = 'general_settings';      
+  $wp_customize->get_section('nav')->panel = 'general_settings';
+  $wp_customize->get_section('static_front_page')->panel = 'general_settings';
+  $wp_customize->get_section('header_text_styles')->panel = 'design_settings';
+  $wp_customize->get_section('background_image')->panel = 'design_settings';
+  $wp_customize->get_section('background_image')->priority = 1000;
+  $wp_customize->get_section('header_image')->panel = 'design_settings';  
+
 }
 add_action( 'customize_register', 'wpt_register_theme_customizer' );
 
