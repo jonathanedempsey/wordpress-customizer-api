@@ -85,7 +85,59 @@ function wpt_register_theme_customizer( $wp_customize ) {
                 'type'           => 'text'
             )
         )
-   );     
+   );   
+
+
+  // Add H1 Style Settings
+  $wp_customize->add_section( 'h1_styles' , array(
+    'title'      => __('H1 Styles','wptthemecustomizer'), 
+    'panel'      => 'design_settings',
+    'priority'   => 100    
+  ) );  
+  $wp_customize->add_setting(
+      'wpt_h1_color',
+      array(
+          'default'         => '#222222',
+          'transport'       => 'postMessage'
+      )
+  );
+  $wp_customize->add_control(
+       new WP_Customize_Color_Control(
+           $wp_customize,
+           'custom_h1_color',
+           array(
+               'label'      => __( 'Color', 'wptthemecustomizer' ),
+               'section'    => 'h1_styles',
+               'settings'   => 'wpt_h1_color' 
+           )
+       )
+   ); 
+  $wp_customize->add_setting(
+      'wpt_h1_font_size',
+      array(
+          'default'         => '24px',
+          'transport'       => 'postMessage'
+      )
+  );
+  $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'custom_h1_font_size',
+            array(
+                'label'          => __( 'Font Size', 'wptthemecustomizer' ),
+                'section'        => 'h1_styles',
+                'settings'       => 'wpt_h1_font_size',
+                'type'           => 'select',
+                'choices'        => array(
+                  '22'   => '22px',
+                  '28'   => '28px',
+                  '32'   => '32px',
+                  '42'   => '42px'
+                )
+            )
+        )       
+   );   
+
 
   // Create custom panels
   $wp_customize->add_panel( 'general_settings', array(
@@ -144,6 +196,14 @@ function wpt_style_header() {
   } 
   <?php endif; ?>
  
+  h1 {
+    font-size: <?php echo get_theme_mod('wpt_h1_font_size'); ?>;
+  }
+  h1 a {
+    color: <?php echo get_theme_mod('wpt_h1_color'); ?>;
+  }
+
+   
   </style>
   <?php 
 

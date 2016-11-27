@@ -54,4 +54,16 @@
         } );
     });    
 
+    wp.customize( 'wpt_h1_color', function( value ) {
+        value.bind( function( to ) {
+            $( 'h1 a' ).css( 'color', to );
+        } );
+    });
+
+    wp.customize( 'wpt_h1_font_size', function( value ) {
+        value.bind( function( to ) {            
+            $( 'h1' ).css( 'font-size', to + 'px' );            
+        } );
+    });     
+
 })( jQuery );
