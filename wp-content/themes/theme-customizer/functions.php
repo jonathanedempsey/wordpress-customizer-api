@@ -1,5 +1,7 @@
 <?php 
 
+require_once('inc/wp-customize-image-reloaded.php');
+
 function wpt_register_theme_customizer( $wp_customize ) {
 
 	//var_dump( $wp_customize );
@@ -45,7 +47,7 @@ function wpt_register_theme_customizer( $wp_customize ) {
       )
   );
   $wp_customize->add_control(
-       new WP_Customize_Image_Control(
+       new My_Customize_Image_Reloaded_Control(
            $wp_customize,
            'custom_logo',
            array(
