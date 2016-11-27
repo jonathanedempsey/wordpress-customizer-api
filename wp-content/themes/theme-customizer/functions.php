@@ -43,7 +43,7 @@ function wpt_register_theme_customizer( $wp_customize ) {
       'wpt_logo',
       array(
           'default'         => get_template_directory_uri() . '/images/logo.png',
-          //'transport'       => 'postMessage'
+          'transport'       => 'postMessage'
       )
   );
   $wp_customize->add_control(
