@@ -31,6 +31,7 @@ function wpt_register_theme_customizer( $wp_customize ) {
 	) );
 	$wp_customize->get_control('display_header_text')->section = 'header_text_styles';  
 	$wp_customize->get_control('header_textcolor')->section = 'header_text_styles'; 
+  $wp_customize->get_control('header_textcolor')->label = __('Site Title Color', 'wptthemecustomizer');
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage'; 
 
   // Add Custom Logo Settings
@@ -58,6 +59,33 @@ function wpt_register_theme_customizer( $wp_customize ) {
            )
        )
    ); 
+
+  // Add Custom Footer Text
+  $wp_customize->add_section( 'custom_footer_text' , array(
+    'title'      => __('Change Footer Text','wptthemecustomizer'), 
+    'panel'      => 'general_settings',
+    'priority'   => 1000    
+  ) );  
+  $wp_customize->add_setting(
+      'wpt_footer_text',
+      array(
+          'default'           => __( 'Custom footer text', 'wptthemecustomizer' ),
+          'transport'         => 'postMessage',
+          'sanitize_callback' => 'sanitize_text'          
+      )
+  );
+  $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'custom_footer_text',
+            array(
+                'label'          => __( 'Footer Text', 'wptthemecustomizer' ),
+                'section'        => 'custom_footer_text',
+                'settings'       => 'wpt_footer_text',
+                'type'           => 'text'
+            )
+        )
+   );     
 
   // Create custom panels
   $wp_customize->add_panel( 'general_settings', array(
@@ -111,7 +139,7 @@ function wpt_style_header() {
   }
   
   <?php if(display_header_text() != true): ?>
-  .site-title {
+  .site-title, .site-description {
     display: none;
   } 
   <?php endif; ?>
@@ -128,6 +156,14 @@ $defaults = array(
   'default-image' => get_template_directory_uri() . '/images/background.png',  
 );
 add_theme_support( 'custom-background', $defaults );
+
+
+// Sanitize text 
+function sanitize_text( $text ) {
+    
+    return sanitize_text_field( $text );
+
+}
 
 
 // Custom js for theme customizer

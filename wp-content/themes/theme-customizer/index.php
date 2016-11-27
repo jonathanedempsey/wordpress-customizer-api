@@ -19,6 +19,10 @@
                 <a href="<?php bloginfo( 'url' ); ?>"><?php bloginfo( 'title' ); ?></a>
             </p>
 
+            <p class="site-description">
+                <?php bloginfo( 'description' ); ?>
+            </p>   
+            
             <?php if( get_header_image() != "" ): ?>
             <div id="banner">                
                 <img src="<?php header_image(); ?>" alt="Header graphic" />                
@@ -50,11 +54,13 @@
             <?php  dynamic_sidebar( 'secondary_widget' ); ?>
         </div>
 
-        <div id="footer">
+        <div id="footer">       
 
-            <p class="site-description">
-                <?php bloginfo( 'description' ); ?>
-            </p>            
+            <?php if( get_theme_mod( 'wpt_footer_text') != "" ): ?>
+            <p id="footertext">
+                <?php echo get_theme_mod( 'wpt_footer_text'); ?>
+            </p>
+            <?php endif; ?>              
 
         </div>
 
