@@ -113,4 +113,23 @@ function wpt_theme_menus() {
 }
 add_action( 'init', 'wpt_theme_menus' );
 
+
+// Add theme widgets
+function wpt_create_widget( $name, $id, $description ) {
+
+  register_sidebar(array(
+    'name' => __( $name ),   
+    'id' => $id, 
+    'description' => __( $description ),
+    'before_widget' => '<div class="widget">',
+    'after_widget' => '</div>',
+    'before_title' => '<h3>',
+    'after_title' => '</h3>'
+  ));
+
+}
+wpt_create_widget( 'Main Widget', 'main_widget', 'For testing purposes' );
+wpt_create_widget( 'Secondary Widget', 'secondary_widget', 'Also for testing purposes' );
+
+
 ?>

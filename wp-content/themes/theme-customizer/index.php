@@ -41,6 +41,10 @@
             <?php endwhile; endif; ?>        
         </div>
 
+        <div class="sidebar">
+            <?php  dynamic_sidebar( 'main_widget' ); ?>
+            <?php  dynamic_sidebar( 'secondary_widget' ); ?>
+        </div>
 
         <div id="footer">
 
